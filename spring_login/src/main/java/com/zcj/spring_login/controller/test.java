@@ -1,5 +1,6 @@
 package com.zcj.spring_login.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.DispatcherServlet;
 
@@ -13,12 +14,16 @@ import java.util.TreeMap;
 @RestController
 public class test {
 
+    @Value("${username}")
+    private String usernaem;
+
     @GetMapping("/huck")
-    public String jlk() {
-        return "success";
+    public String jlk(@RequestParam("name") String name, HttpServletRequest httpServletRequest) {
+        System.out.println("调用了");
+        return "success" + usernaem + "   " + httpServletRequest.getSession().getId();
     }
 
-    @GetMapping("yuck")
+    @GetMapping("/luck")
     public Map jkl() {
         Map kj = new TreeMap();
         kj.put("yuk", "测试成功");
@@ -49,12 +54,13 @@ public class test {
 
         try {
             Thread.sleep(1000);
-        //第三方数据源调用
+            //第三方数据源调用
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         return "data:xdclass 行情" + Math.random() + "\n\n";
     }
+
 
 }
