@@ -6,7 +6,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 //eureka客户端
 @EnableEurekaClient
-//可以被注册中心扫描到
+//可以被注册中心扫描到经
 @EnableDiscoveryClient
 @SpringBootApplication
 public class SpringLoginApplication {
