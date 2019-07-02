@@ -1,18 +1,18 @@
-package com.zcj.spring_getway;
+package com.zcj.spring_config;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.config.server.EnableConfigServer;
 
-//@EnableEurekaClient
-//这个注解代替上面的eureka的客户端注解
 @EnableDiscoveryClient
+//springcloudconfig服务端
+@EnableConfigServer
 @SpringBootApplication
-public class SpringGetwayApplication {
+public class SpringConfigApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringGetwayApplication.class, args);
+        SpringApplication.run(SpringConfigApplication.class, args);
     }
 
 }
