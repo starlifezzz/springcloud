@@ -2,12 +2,13 @@ package com.zcj.spring_common.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zcj.spring_common.service.Feign;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
@@ -18,29 +19,6 @@ public class test {
 
     @Resource
     private Feign feign;
-
-    @RequestMapping("/huck")
-    String getInfo(String name) {
-        System.err.println(name);
-        return feign.getInfo(name);
-    }
-
-
-    @GetMapping("/dddddd")
-    public void jkl() {
-        RestTemplate restTemplate = new RestTemplate();
-        String url = "http://baidu.com";
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        JSONObject jsonObj = new JSONObject();
-        jsonObj.put("start", 1);
-        jsonObj.put("page", 5);
-
-        HttpEntity<String> entity = new HttpEntity<>(jsonObj.toString(), headers);
-        ResponseEntity<JSONObject> exchange = restTemplate.exchange(url,
-                HttpMethod.GET, entity, JSONObject.class);
-        System.out.println(exchange.getBody());
-    }
 
     //做rsttemplete的接口调用
     public static void main(String[] args) throws JsonProcessingException {
@@ -80,6 +58,33 @@ public class test {
 //        HttpEntity<MultiValueMap> entity = new HttpEntity<>(map, headers);
 //        ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
 
+    }
+
+    @RequestMapping("/huck")
+    String getInfo(String name) {
+        System.err.println(name);
+        return feign.getInfo(name);
+    }
+
+    @GetMapping("/dddddd")
+    public void jkl() {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "http://baidu.com";
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        JSONObject jsonObj = new JSONObject();
+        jsonObj.put("start", 1);
+        jsonObj.put("page", 5);
+
+        HttpEntity<String> entity = new HttpEntity<>(jsonObj.toString(), headers);
+        ResponseEntity<JSONObject> exchange = restTemplate.exchange(url,
+                HttpMethod.GET, entity, JSONObject.class);
+        System.out.println(exchange.getBody());
+    }
+
+    @RequestMapping("/test")
+    public String test() {
+        return "kkkkk";
     }
 
 }
