@@ -4,7 +4,6 @@ import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -76,6 +75,9 @@ public class OauthConfig1 extends AuthorizationServerConfigurerAdapter {
 //        clients.inMemory().withClient("client")
 //                .secret(passwordEncoder().encode("secret"))
 //                .authorizedGrantTypes("authorization_code").scopes("app").redirectUris("http://127.0.0.1:8088/test");
+        String dev = passwordEncoder().encode("dev");
+        System.out.println(dev);
+        //这里和上面内存模式不一样，数据库模式是吧上面的secret，clientid都放在了数据库表中，所以你要手动在oauth_client_details中配置
         clients.withClientDetails(jdbcClientDetailsService());
     }
 

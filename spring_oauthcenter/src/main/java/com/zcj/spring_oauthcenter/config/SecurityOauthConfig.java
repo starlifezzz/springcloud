@@ -38,13 +38,14 @@ public class SecurityOauthConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-    //    @Override
+//    @Override
 //    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //        auth.inMemoryAuthentication()
-//                .withUser("admin")
-//                .password(passwordEncoder.encode("admin"))
-//                .roles("admin").and().withUser("user").password(passwordEncoder.encode("admin")).roles("user");
+//                .withUser("admin").password(passwordEncoder.encode("admin")).roles("admin")
+//                .and()
+//                .withUser("user").password(passwordEncoder.encode("admin")).roles("user");
 //    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDeatilServiceimpl);
