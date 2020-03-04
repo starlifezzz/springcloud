@@ -1,17 +1,23 @@
 package com.zcj.spring_oauthcenter.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.zcj.spring_oauthcenter.service.impl.UserDeatilServiceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
+import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
+import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
@@ -19,14 +25,18 @@ import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 @EnableAuthorizationServer
 public class OauthConfig1 extends AuthorizationServerConfigurerAdapter {
 
-//    /**
-//     * 核心认证管理器
-//     */
-//    @Autowired
-//    private AuthenticationManager authenticationManager;
+    /**
+     * 核心认证管理器(为了使用密码模式，不然可以不用)
+     */
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
 
     @Autowired
     private DruidDataSource druidDataSource;
+
+    @Autowired
+    private UserDeatilServiceimpl userDeatilServiceimpl;
 
     /**
      * 令牌储存模式
@@ -37,6 +47,7 @@ public class OauthConfig1 extends AuthorizationServerConfigurerAdapter {
     TokenStore tokenStore() {
         return new JdbcTokenStore(druidDataSource);
     }
+
 
     /**
      * 密码验证格式
@@ -59,10 +70,18 @@ public class OauthConfig1 extends AuthorizationServerConfigurerAdapter {
         return jdbcClientDetailsService;
     }
 
-//    @Override
-//    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+    @Bean
+    public AuthorizationCodeServices authorizationCodeServices() {
+        return new JdbcAuthorizationCodeServices(druidDataSource);
+    }
+
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        security.allowFormAuthenticationForClients();
+        security.checkTokenAccess("isAuthenticated()");
+        security.tokenKeyAccess("isAuthenticated()");
 //        super.configure(security);
-//    }
+    }
 
     /**
      * 客户端授权模式
@@ -81,9 +100,27 @@ public class OauthConfig1 extends AuthorizationServerConfigurerAdapter {
         clients.withClientDetails(jdbcClientDetailsService());
     }
 
+
+    /**
+     * 配置令牌的储存方式
+     *
+     * @param endpoints
+     * @throws Exception
+     */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(tokenStore());
-//        endpoints.authenticationManager(authenticationManager);
+        endpoints.authenticationManager(authenticationManager)
+                .userDetailsService(userDeatilServiceimpl)
+                .tokenStore(tokenStore()).authorizationCodeServices(authorizationCodeServices());
+        // 配置tokenServices参数
+        DefaultTokenServices tokenServices = new DefaultTokenServices();
+        tokenServices.setTokenStore(endpoints.getTokenStore());
+        tokenServices.setSupportRefreshToken(true);
+        tokenServices.setClientDetailsService(endpoints.getClientDetailsService());
+        tokenServices.setTokenEnhancer(endpoints.getTokenEnhancer());
+        tokenServices.setAccessTokenValiditySeconds(60 * 60 * 60 * 4); // 30天
+        endpoints.tokenServices(tokenServices);
+
+
     }
 }

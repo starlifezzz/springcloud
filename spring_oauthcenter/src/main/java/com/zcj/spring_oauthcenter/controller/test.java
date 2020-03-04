@@ -14,16 +14,22 @@ public class test {
 
     private final OauthCodeDao oauthCodeDao;
 
+    @Autowired
     public test(OauthCodeDao oauthCodeDao) {
         this.oauthCodeDao = oauthCodeDao;
     }
 
-    @Autowired
 
     @RequestMapping("/hhhh")
     public List<OauthCode> oauthCode() {
         OauthCodeExample oauthCodeExample = new OauthCodeExample();
         List<OauthCode> oauthCodes = oauthCodeDao.selectByExample(oauthCodeExample);
         return oauthCodes;
+    }
+
+
+    @RequestMapping("/tockentest")
+    public String tockentest() {
+        return "success";
     }
 }

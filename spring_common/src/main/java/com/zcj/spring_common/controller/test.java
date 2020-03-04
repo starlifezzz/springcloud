@@ -87,4 +87,9 @@ public class test {
         return "kkkkk";
     }
 
+
+    @RequestMapping("/tockentest")
+    public String tockentest() {
+        return "success";
+    }
 }
