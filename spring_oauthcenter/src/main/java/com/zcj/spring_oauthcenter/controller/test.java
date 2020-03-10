@@ -4,6 +4,7 @@ import com.zcj.spring_oauthcenter.dao.OauthCodeDao;
 import com.zcj.spring_oauthcenter.po.OauthCode;
 import com.zcj.spring_oauthcenter.po.OauthCodeExample;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,5 +32,11 @@ public class test {
     @RequestMapping("/tockentest")
     public String tockentest() {
         return "success";
+    }
+
+
+    @GetMapping("/noOauth")
+    public String noOauth(){
+        return "无权限";
     }
 }

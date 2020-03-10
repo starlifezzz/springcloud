@@ -15,7 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
@@ -47,7 +46,8 @@ public class MyFilterSecurityInterceptor extends GenericFilterBean {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         String requestURI = httpServletRequest.getRequestURI();
 //        接口的正则表达式匹配规则
-        String urlMatches = "^/oauth/\\S*";
+        String urlMatches = "^/oauth/\\S*|^/noOauth";
+        System.out.println(requestURI);
         //查看是否登录(因为这个过滤器加在了security过滤链的最后，所以未登录用户是anonymousUser)
         if ("anonymousUser".equals(name) || requestURI.matches(urlMatches)) {
             //未登录放行login页面
@@ -57,14 +57,23 @@ public class MyFilterSecurityInterceptor extends GenericFilterBean {
             TbPermissionExample tbPermissionExample = new TbPermissionExample();
             tbPermissionExample.or().andUrlIsNotNull();
             List<TbPermission> tbPermissions = tbPermissionDao.selectByExample(tbPermissionExample);
+            int hasOauth = 0;
             for (TbPermission tbPermission : tbPermissions) {
                 boolean contains = StringUtils.equalsIgnoreCase(tbPermission.getUrl(), requestURI);
                 if (contains) {
+                    hasOauth = 1;
                     filterChain.doFilter(servletRequest, servletResponse);
+                    break;
                 }
             }
-            HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
-            httpServletResponse.sendRedirect("http://www.baidu.com");
+            switch (hasOauth) {
+                case 0: {
+                    httpServletRequest.getRequestDispatcher("/noOauth").forward(servletRequest, servletResponse);
+                    break;
+                }
+            }
+//            HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
+//            httpServletResponse.sendRedirect("/noOauth");
         }
     }
 }

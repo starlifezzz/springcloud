@@ -59,7 +59,7 @@ public class SecurityOauthConfig extends WebSecurityConfigurerAdapter {
 
 
         http.formLogin().loginPage("/wlogin").permitAll().loginProcessingUrl("/login")
-                .and().authorizeRequests().antMatchers("/oauth/**").permitAll()
+                .and().authorizeRequests().antMatchers("/oauth/**","/noOauth").permitAll()
                 .antMatchers("/tockentest").hasAuthority("SystemUserView")
                 .anyRequest().authenticated()
                 .and().csrf().disable().addFilterAfter(myFilterSecurityInterceptor, SwitchUserFilter.class);
