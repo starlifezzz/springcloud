@@ -2,30 +2,34 @@ package com.zcj.spring_oauthcenter.dao;
 
 import com.zcj.spring_oauthcenter.po.TbPermission;
 import com.zcj.spring_oauthcenter.po.TbPermissionExample;
-import com.zcj.spring_oauthcenter.po.TbPermissionWithBLOBs;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
 
 public interface TbPermissionDao {
     long countByExample(TbPermissionExample example);
 
     int deleteByExample(TbPermissionExample example);
 
-    int insert(TbPermissionWithBLOBs record);
+    int deleteByPrimaryKey(Long id);
 
-    int insertSelective(TbPermissionWithBLOBs record);
+    int insert(TbPermission record);
 
-    List<TbPermissionWithBLOBs> selectByExampleWithBLOBs(TbPermissionExample example);
+    int insertSelective(TbPermission record);
 
     List<TbPermission> selectByExample(TbPermissionExample example);
 
-    int updateByExampleSelective(@Param("record") TbPermissionWithBLOBs record, @Param("example") TbPermissionExample example);
+    TbPermission selectByPrimaryKey(Long id);
 
-    int updateByExampleWithBLOBs(@Param("record") TbPermissionWithBLOBs record, @Param("example") TbPermissionExample example);
+    int updateByExampleSelective(@Param("record") TbPermission record, @Param("example") TbPermissionExample example);
 
     int updateByExample(@Param("record") TbPermission record, @Param("example") TbPermissionExample example);
 
-    List<Map> queryByUserid(@Param("userId") int userId);
+    int updateByPrimaryKeySelective(TbPermission record);
+
+    int updateByPrimaryKey(TbPermission record);
+
+
+    List<Map> queryByUserid(Long userId);
 }

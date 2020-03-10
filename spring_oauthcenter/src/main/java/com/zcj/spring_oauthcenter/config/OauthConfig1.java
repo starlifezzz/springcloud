@@ -79,7 +79,7 @@ public class OauthConfig1 extends AuthorizationServerConfigurerAdapter {
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security.allowFormAuthenticationForClients();
         security.checkTokenAccess("isAuthenticated()");
-        security.tokenKeyAccess("isAuthenticated()");
+        security.tokenKeyAccess("permitAll()");
 //        super.configure(security);
     }
 

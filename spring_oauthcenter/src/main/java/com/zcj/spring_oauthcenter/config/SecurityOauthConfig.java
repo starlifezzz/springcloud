@@ -8,10 +8,12 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.switchuser.SwitchUserFilter;
 
 import java.util.Collections;
 
@@ -23,10 +25,13 @@ public class SecurityOauthConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final MyFilterSecurityInterceptor myFilterSecurityInterceptor;
+
     @Autowired
-    public SecurityOauthConfig(UserDeatilServiceimpl userDeatilServiceimpl, PasswordEncoder passwordEncoder) {
+    public SecurityOauthConfig(UserDeatilServiceimpl userDeatilServiceimpl, PasswordEncoder passwordEncoder, MyFilterSecurityInterceptor myFilterSecurityInterceptor) {
         this.userDeatilServiceimpl = userDeatilServiceimpl;
         this.passwordEncoder = passwordEncoder;
+        this.myFilterSecurityInterceptor = myFilterSecurityInterceptor;
     }
 
 
@@ -54,10 +59,10 @@ public class SecurityOauthConfig extends WebSecurityConfigurerAdapter {
 
 
         http.formLogin().loginPage("/wlogin").permitAll().loginProcessingUrl("/login")
-                .and().authorizeRequests().antMatchers("/oauth/**", "/hhhh").permitAll()
+                .and().authorizeRequests().antMatchers("/oauth/**").permitAll()
                 .antMatchers("/tockentest").hasAuthority("SystemUserView")
                 .anyRequest().authenticated()
-                .and().csrf().disable();
+                .and().csrf().disable().addFilterAfter(myFilterSecurityInterceptor, SwitchUserFilter.class);
 
 //        http.csrf().disable();
 //        http.requestMatchers().anyRequest()
@@ -81,9 +86,9 @@ public class SecurityOauthConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDeatilServiceimpl);
     }
 
-//    @Override
-//    public void configure(WebSecurity web) {
-//        web.ignoring().antMatchers("/oauth/check_token");
-//    }
+    @Override
+    public void configure(WebSecurity web) {
+        web.ignoring().antMatchers("/oauth/check_token");
+    }
 
 }

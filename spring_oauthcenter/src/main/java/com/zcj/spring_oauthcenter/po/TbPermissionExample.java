@@ -1,6 +1,7 @@
 package com.zcj.spring_oauthcenter.po;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TbPermissionExample {
@@ -104,353 +105,523 @@ public class TbPermissionExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andTokenIdIsNull() {
-            addCriterion("token_id is null");
+        public Criteria andIdIsNull() {
+            addCriterion("tb_permission.id is null");
             return (Criteria) this;
         }
 
-        public Criteria andTokenIdIsNotNull() {
-            addCriterion("token_id is not null");
+        public Criteria andIdIsNotNull() {
+            addCriterion("tb_permission.id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTokenIdEqualTo(String value) {
-            addCriterion("token_id =", value, "tokenId");
+        public Criteria andIdEqualTo(Long value) {
+            addCriterion("tb_permission.id =", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andTokenIdNotEqualTo(String value) {
-            addCriterion("token_id <>", value, "tokenId");
+        public Criteria andIdNotEqualTo(Long value) {
+            addCriterion("tb_permission.id <>", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andTokenIdGreaterThan(String value) {
-            addCriterion("token_id >", value, "tokenId");
+        public Criteria andIdGreaterThan(Long value) {
+            addCriterion("tb_permission.id >", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andTokenIdGreaterThanOrEqualTo(String value) {
-            addCriterion("token_id >=", value, "tokenId");
+        public Criteria andIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("tb_permission.id >=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andTokenIdLessThan(String value) {
-            addCriterion("token_id <", value, "tokenId");
+        public Criteria andIdLessThan(Long value) {
+            addCriterion("tb_permission.id <", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andTokenIdLessThanOrEqualTo(String value) {
-            addCriterion("token_id <=", value, "tokenId");
+        public Criteria andIdLessThanOrEqualTo(Long value) {
+            addCriterion("tb_permission.id <=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andTokenIdLike(String value) {
-            addCriterion("token_id like", value, "tokenId");
+        public Criteria andIdIn(List<Long> values) {
+            addCriterion("tb_permission.id in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andTokenIdNotLike(String value) {
-            addCriterion("token_id not like", value, "tokenId");
+        public Criteria andIdNotIn(List<Long> values) {
+            addCriterion("tb_permission.id not in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andTokenIdIn(List<String> values) {
-            addCriterion("token_id in", values, "tokenId");
+        public Criteria andIdBetween(Long value1, Long value2) {
+            addCriterion("tb_permission.id between", value1, value2, "id");
             return (Criteria) this;
         }
 
-        public Criteria andTokenIdNotIn(List<String> values) {
-            addCriterion("token_id not in", values, "tokenId");
+        public Criteria andIdNotBetween(Long value1, Long value2) {
+            addCriterion("tb_permission.id not between", value1, value2, "id");
             return (Criteria) this;
         }
 
-        public Criteria andTokenIdBetween(String value1, String value2) {
-            addCriterion("token_id between", value1, value2, "tokenId");
+        public Criteria andParentIdIsNull() {
+            addCriterion("tb_permission.parent_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andTokenIdNotBetween(String value1, String value2) {
-            addCriterion("token_id not between", value1, value2, "tokenId");
+        public Criteria andParentIdIsNotNull() {
+            addCriterion("tb_permission.parent_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAuthenticationIdIsNull() {
-            addCriterion("authentication_id is null");
+        public Criteria andParentIdEqualTo(Long value) {
+            addCriterion("tb_permission.parent_id =", value, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andAuthenticationIdIsNotNull() {
-            addCriterion("authentication_id is not null");
+        public Criteria andParentIdNotEqualTo(Long value) {
+            addCriterion("tb_permission.parent_id <>", value, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andAuthenticationIdEqualTo(String value) {
-            addCriterion("authentication_id =", value, "authenticationId");
+        public Criteria andParentIdGreaterThan(Long value) {
+            addCriterion("tb_permission.parent_id >", value, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andAuthenticationIdNotEqualTo(String value) {
-            addCriterion("authentication_id <>", value, "authenticationId");
+        public Criteria andParentIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("tb_permission.parent_id >=", value, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andAuthenticationIdGreaterThan(String value) {
-            addCriterion("authentication_id >", value, "authenticationId");
+        public Criteria andParentIdLessThan(Long value) {
+            addCriterion("tb_permission.parent_id <", value, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andAuthenticationIdGreaterThanOrEqualTo(String value) {
-            addCriterion("authentication_id >=", value, "authenticationId");
+        public Criteria andParentIdLessThanOrEqualTo(Long value) {
+            addCriterion("tb_permission.parent_id <=", value, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andAuthenticationIdLessThan(String value) {
-            addCriterion("authentication_id <", value, "authenticationId");
+        public Criteria andParentIdIn(List<Long> values) {
+            addCriterion("tb_permission.parent_id in", values, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andAuthenticationIdLessThanOrEqualTo(String value) {
-            addCriterion("authentication_id <=", value, "authenticationId");
+        public Criteria andParentIdNotIn(List<Long> values) {
+            addCriterion("tb_permission.parent_id not in", values, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andAuthenticationIdLike(String value) {
-            addCriterion("authentication_id like", value, "authenticationId");
+        public Criteria andParentIdBetween(Long value1, Long value2) {
+            addCriterion("tb_permission.parent_id between", value1, value2, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andAuthenticationIdNotLike(String value) {
-            addCriterion("authentication_id not like", value, "authenticationId");
+        public Criteria andParentIdNotBetween(Long value1, Long value2) {
+            addCriterion("tb_permission.parent_id not between", value1, value2, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andAuthenticationIdIn(List<String> values) {
-            addCriterion("authentication_id in", values, "authenticationId");
+        public Criteria andNameIsNull() {
+            addCriterion("tb_permission.`name` is null");
             return (Criteria) this;
         }
 
-        public Criteria andAuthenticationIdNotIn(List<String> values) {
-            addCriterion("authentication_id not in", values, "authenticationId");
+        public Criteria andNameIsNotNull() {
+            addCriterion("tb_permission.`name` is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAuthenticationIdBetween(String value1, String value2) {
-            addCriterion("authentication_id between", value1, value2, "authenticationId");
+        public Criteria andNameEqualTo(String value) {
+            addCriterion("tb_permission.`name` =", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andAuthenticationIdNotBetween(String value1, String value2) {
-            addCriterion("authentication_id not between", value1, value2, "authenticationId");
+        public Criteria andNameNotEqualTo(String value) {
+            addCriterion("tb_permission.`name` <>", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameIsNull() {
-            addCriterion("user_name is null");
+        public Criteria andNameGreaterThan(String value) {
+            addCriterion("tb_permission.`name` >", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameIsNotNull() {
-            addCriterion("user_name is not null");
+        public Criteria andNameGreaterThanOrEqualTo(String value) {
+            addCriterion("tb_permission.`name` >=", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameEqualTo(String value) {
-            addCriterion("user_name =", value, "userName");
+        public Criteria andNameLessThan(String value) {
+            addCriterion("tb_permission.`name` <", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameNotEqualTo(String value) {
-            addCriterion("user_name <>", value, "userName");
+        public Criteria andNameLessThanOrEqualTo(String value) {
+            addCriterion("tb_permission.`name` <=", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameGreaterThan(String value) {
-            addCriterion("user_name >", value, "userName");
+        public Criteria andNameLike(String value) {
+            addCriterion("tb_permission.`name` like", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameGreaterThanOrEqualTo(String value) {
-            addCriterion("user_name >=", value, "userName");
+        public Criteria andNameNotLike(String value) {
+            addCriterion("tb_permission.`name` not like", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameLessThan(String value) {
-            addCriterion("user_name <", value, "userName");
+        public Criteria andNameIn(List<String> values) {
+            addCriterion("tb_permission.`name` in", values, "name");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameLessThanOrEqualTo(String value) {
-            addCriterion("user_name <=", value, "userName");
+        public Criteria andNameNotIn(List<String> values) {
+            addCriterion("tb_permission.`name` not in", values, "name");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameLike(String value) {
-            addCriterion("user_name like", value, "userName");
+        public Criteria andNameBetween(String value1, String value2) {
+            addCriterion("tb_permission.`name` between", value1, value2, "name");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameNotLike(String value) {
-            addCriterion("user_name not like", value, "userName");
+        public Criteria andNameNotBetween(String value1, String value2) {
+            addCriterion("tb_permission.`name` not between", value1, value2, "name");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameIn(List<String> values) {
-            addCriterion("user_name in", values, "userName");
+        public Criteria andEnameIsNull() {
+            addCriterion("tb_permission.ename is null");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameNotIn(List<String> values) {
-            addCriterion("user_name not in", values, "userName");
+        public Criteria andEnameIsNotNull() {
+            addCriterion("tb_permission.ename is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameBetween(String value1, String value2) {
-            addCriterion("user_name between", value1, value2, "userName");
+        public Criteria andEnameEqualTo(String value) {
+            addCriterion("tb_permission.ename =", value, "ename");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameNotBetween(String value1, String value2) {
-            addCriterion("user_name not between", value1, value2, "userName");
+        public Criteria andEnameNotEqualTo(String value) {
+            addCriterion("tb_permission.ename <>", value, "ename");
             return (Criteria) this;
         }
 
-        public Criteria andClientIdIsNull() {
-            addCriterion("client_id is null");
+        public Criteria andEnameGreaterThan(String value) {
+            addCriterion("tb_permission.ename >", value, "ename");
             return (Criteria) this;
         }
 
-        public Criteria andClientIdIsNotNull() {
-            addCriterion("client_id is not null");
+        public Criteria andEnameGreaterThanOrEqualTo(String value) {
+            addCriterion("tb_permission.ename >=", value, "ename");
             return (Criteria) this;
         }
 
-        public Criteria andClientIdEqualTo(String value) {
-            addCriterion("client_id =", value, "clientId");
+        public Criteria andEnameLessThan(String value) {
+            addCriterion("tb_permission.ename <", value, "ename");
             return (Criteria) this;
         }
 
-        public Criteria andClientIdNotEqualTo(String value) {
-            addCriterion("client_id <>", value, "clientId");
+        public Criteria andEnameLessThanOrEqualTo(String value) {
+            addCriterion("tb_permission.ename <=", value, "ename");
             return (Criteria) this;
         }
 
-        public Criteria andClientIdGreaterThan(String value) {
-            addCriterion("client_id >", value, "clientId");
+        public Criteria andEnameLike(String value) {
+            addCriterion("tb_permission.ename like", value, "ename");
             return (Criteria) this;
         }
 
-        public Criteria andClientIdGreaterThanOrEqualTo(String value) {
-            addCriterion("client_id >=", value, "clientId");
+        public Criteria andEnameNotLike(String value) {
+            addCriterion("tb_permission.ename not like", value, "ename");
             return (Criteria) this;
         }
 
-        public Criteria andClientIdLessThan(String value) {
-            addCriterion("client_id <", value, "clientId");
+        public Criteria andEnameIn(List<String> values) {
+            addCriterion("tb_permission.ename in", values, "ename");
             return (Criteria) this;
         }
 
-        public Criteria andClientIdLessThanOrEqualTo(String value) {
-            addCriterion("client_id <=", value, "clientId");
+        public Criteria andEnameNotIn(List<String> values) {
+            addCriterion("tb_permission.ename not in", values, "ename");
             return (Criteria) this;
         }
 
-        public Criteria andClientIdLike(String value) {
-            addCriterion("client_id like", value, "clientId");
+        public Criteria andEnameBetween(String value1, String value2) {
+            addCriterion("tb_permission.ename between", value1, value2, "ename");
             return (Criteria) this;
         }
 
-        public Criteria andClientIdNotLike(String value) {
-            addCriterion("client_id not like", value, "clientId");
+        public Criteria andEnameNotBetween(String value1, String value2) {
+            addCriterion("tb_permission.ename not between", value1, value2, "ename");
             return (Criteria) this;
         }
 
-        public Criteria andClientIdIn(List<String> values) {
-            addCriterion("client_id in", values, "clientId");
+        public Criteria andUrlIsNull() {
+            addCriterion("tb_permission.url is null");
             return (Criteria) this;
         }
 
-        public Criteria andClientIdNotIn(List<String> values) {
-            addCriterion("client_id not in", values, "clientId");
+        public Criteria andUrlIsNotNull() {
+            addCriterion("tb_permission.url is not null");
             return (Criteria) this;
         }
 
-        public Criteria andClientIdBetween(String value1, String value2) {
-            addCriterion("client_id between", value1, value2, "clientId");
+        public Criteria andUrlEqualTo(String value) {
+            addCriterion("tb_permission.url =", value, "url");
             return (Criteria) this;
         }
 
-        public Criteria andClientIdNotBetween(String value1, String value2) {
-            addCriterion("client_id not between", value1, value2, "clientId");
+        public Criteria andUrlNotEqualTo(String value) {
+            addCriterion("tb_permission.url <>", value, "url");
             return (Criteria) this;
         }
 
-        public Criteria andRefreshTokenIsNull() {
-            addCriterion("refresh_token is null");
+        public Criteria andUrlGreaterThan(String value) {
+            addCriterion("tb_permission.url >", value, "url");
             return (Criteria) this;
         }
 
-        public Criteria andRefreshTokenIsNotNull() {
-            addCriterion("refresh_token is not null");
+        public Criteria andUrlGreaterThanOrEqualTo(String value) {
+            addCriterion("tb_permission.url >=", value, "url");
             return (Criteria) this;
         }
 
-        public Criteria andRefreshTokenEqualTo(String value) {
-            addCriterion("refresh_token =", value, "refreshToken");
+        public Criteria andUrlLessThan(String value) {
+            addCriterion("tb_permission.url <", value, "url");
             return (Criteria) this;
         }
 
-        public Criteria andRefreshTokenNotEqualTo(String value) {
-            addCriterion("refresh_token <>", value, "refreshToken");
+        public Criteria andUrlLessThanOrEqualTo(String value) {
+            addCriterion("tb_permission.url <=", value, "url");
             return (Criteria) this;
         }
 
-        public Criteria andRefreshTokenGreaterThan(String value) {
-            addCriterion("refresh_token >", value, "refreshToken");
+        public Criteria andUrlLike(String value) {
+            addCriterion("tb_permission.url like", value, "url");
             return (Criteria) this;
         }
 
-        public Criteria andRefreshTokenGreaterThanOrEqualTo(String value) {
-            addCriterion("refresh_token >=", value, "refreshToken");
+        public Criteria andUrlNotLike(String value) {
+            addCriterion("tb_permission.url not like", value, "url");
             return (Criteria) this;
         }
 
-        public Criteria andRefreshTokenLessThan(String value) {
-            addCriterion("refresh_token <", value, "refreshToken");
+        public Criteria andUrlIn(List<String> values) {
+            addCriterion("tb_permission.url in", values, "url");
             return (Criteria) this;
         }
 
-        public Criteria andRefreshTokenLessThanOrEqualTo(String value) {
-            addCriterion("refresh_token <=", value, "refreshToken");
+        public Criteria andUrlNotIn(List<String> values) {
+            addCriterion("tb_permission.url not in", values, "url");
             return (Criteria) this;
         }
 
-        public Criteria andRefreshTokenLike(String value) {
-            addCriterion("refresh_token like", value, "refreshToken");
+        public Criteria andUrlBetween(String value1, String value2) {
+            addCriterion("tb_permission.url between", value1, value2, "url");
             return (Criteria) this;
         }
 
-        public Criteria andRefreshTokenNotLike(String value) {
-            addCriterion("refresh_token not like", value, "refreshToken");
+        public Criteria andUrlNotBetween(String value1, String value2) {
+            addCriterion("tb_permission.url not between", value1, value2, "url");
             return (Criteria) this;
         }
 
-        public Criteria andRefreshTokenIn(List<String> values) {
-            addCriterion("refresh_token in", values, "refreshToken");
+        public Criteria andDescriptionIsNull() {
+            addCriterion("tb_permission.description is null");
             return (Criteria) this;
         }
 
-        public Criteria andRefreshTokenNotIn(List<String> values) {
-            addCriterion("refresh_token not in", values, "refreshToken");
+        public Criteria andDescriptionIsNotNull() {
+            addCriterion("tb_permission.description is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRefreshTokenBetween(String value1, String value2) {
-            addCriterion("refresh_token between", value1, value2, "refreshToken");
+        public Criteria andDescriptionEqualTo(String value) {
+            addCriterion("tb_permission.description =", value, "description");
             return (Criteria) this;
         }
 
-        public Criteria andRefreshTokenNotBetween(String value1, String value2) {
-            addCriterion("refresh_token not between", value1, value2, "refreshToken");
+        public Criteria andDescriptionNotEqualTo(String value) {
+            addCriterion("tb_permission.description <>", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionGreaterThan(String value) {
+            addCriterion("tb_permission.description >", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionGreaterThanOrEqualTo(String value) {
+            addCriterion("tb_permission.description >=", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionLessThan(String value) {
+            addCriterion("tb_permission.description <", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionLessThanOrEqualTo(String value) {
+            addCriterion("tb_permission.description <=", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionLike(String value) {
+            addCriterion("tb_permission.description like", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotLike(String value) {
+            addCriterion("tb_permission.description not like", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionIn(List<String> values) {
+            addCriterion("tb_permission.description in", values, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotIn(List<String> values) {
+            addCriterion("tb_permission.description not in", values, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionBetween(String value1, String value2) {
+            addCriterion("tb_permission.description between", value1, value2, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotBetween(String value1, String value2) {
+            addCriterion("tb_permission.description not between", value1, value2, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIsNull() {
+            addCriterion("tb_permission.create_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIsNotNull() {
+            addCriterion("tb_permission.create_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEqualTo(Date value) {
+            addCriterion("tb_permission.create_time =", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotEqualTo(Date value) {
+            addCriterion("tb_permission.create_time <>", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThan(Date value) {
+            addCriterion("tb_permission.create_time >", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("tb_permission.create_time >=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThan(Date value) {
+            addCriterion("tb_permission.create_time <", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("tb_permission.create_time <=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIn(List<Date> values) {
+            addCriterion("tb_permission.create_time in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotIn(List<Date> values) {
+            addCriterion("tb_permission.create_time not in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeBetween(Date value1, Date value2) {
+            addCriterion("tb_permission.create_time between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("tb_permission.create_time not between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeIsNull() {
+            addCriterion("tb_permission.update_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeIsNotNull() {
+            addCriterion("tb_permission.update_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeEqualTo(Date value) {
+            addCriterion("tb_permission.update_time =", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotEqualTo(Date value) {
+            addCriterion("tb_permission.update_time <>", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeGreaterThan(Date value) {
+            addCriterion("tb_permission.update_time >", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("tb_permission.update_time >=", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeLessThan(Date value) {
+            addCriterion("tb_permission.update_time <", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("tb_permission.update_time <=", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeIn(List<Date> values) {
+            addCriterion("tb_permission.update_time in", values, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotIn(List<Date> values) {
+            addCriterion("tb_permission.update_time not in", values, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeBetween(Date value1, Date value2) {
+            addCriterion("tb_permission.update_time between", value1, value2, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("tb_permission.update_time not between", value1, value2, "updateTime");
             return (Criteria) this;
         }
     }

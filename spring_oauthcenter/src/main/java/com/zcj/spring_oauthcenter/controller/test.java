@@ -20,7 +20,7 @@ public class test {
     }
 
 
-    @RequestMapping("/hhhh")
+    @RequestMapping("/getCode")
     public List<OauthCode> oauthCode() {
         OauthCodeExample oauthCodeExample = new OauthCodeExample();
         List<OauthCode> oauthCodes = oauthCodeDao.selectByExample(oauthCodeExample);

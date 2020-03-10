@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.zcj.spring_common.service.Feign;
 import org.springframework.http.*;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -88,8 +89,13 @@ public class test {
     }
 
 
+    /**
+     * @param username
+     * @return
+     * @AuthenticationPrincipal注解可以直接获取当前登录用户的用户名
+     */
     @RequestMapping("/tockentest")
-    public String tockentest() {
-        return "success";
+    public String tockentest(@AuthenticationPrincipal String username) {
+        return "success 用户名是:" + username + "";
     }
 }

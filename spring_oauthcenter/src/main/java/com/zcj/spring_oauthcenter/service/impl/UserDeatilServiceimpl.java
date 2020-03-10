@@ -38,7 +38,7 @@ public class UserDeatilServiceimpl implements UserDetailsService {
         tbUserExample.or().andUsernameLike(s);
         List<GrantedAuthority> authorities = new ArrayList<>();
         List<TbUser> tbUsers = tbUserDao.selectByExample(tbUserExample);
-        List<Map> maps = tbPermissionDao.queryByUserid(tbUsers.get(0).getId().intValue());
+        List<Map> maps = tbPermissionDao.queryByUserid(tbUsers.get(0).getId());
         maps.forEach(kk -> {
             System.out.println(kk);
             authorities.add(new SimpleGrantedAuthority(kk.get("ename").toString()));

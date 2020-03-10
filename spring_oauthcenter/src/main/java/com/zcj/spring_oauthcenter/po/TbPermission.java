@@ -1,23 +1,54 @@
 package com.zcj.spring_oauthcenter.po;
 
 import java.io.Serializable;
+import java.util.Date;
 import lombok.Data;
 
 /**
- * oauth_access_token
+ * tb_permission
  * @author 
  */
 @Data
 public class TbPermission implements Serializable {
-    private String tokenId;
+    /**
+     * 主键ID
+     */
+    private Long id;
 
-    private String authenticationId;
+    /**
+     * 用户ID
+     */
+    private Long parentId;
 
-    private String userName;
+    /**
+     * 权限名字
+     */
+    private String name;
 
-    private String clientId;
+    /**
+     * 权限名字
+     */
+    private String ename;
 
-    private String refreshToken;
+    /**
+     * 请求路径
+     */
+    private String url;
+
+    /**
+     * 描述
+     */
+    private String description;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
+     * 更新时间
+     */
+    private Date updateTime;
 
     private static final long serialVersionUID = 1L;
 }
