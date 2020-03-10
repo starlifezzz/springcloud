@@ -19,6 +19,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**@author mqz77
+ * @date  2020.3.10
+ * security过滤器
+ */
 @Configuration
 public class MyFilterSecurityInterceptor extends GenericFilterBean {
 
