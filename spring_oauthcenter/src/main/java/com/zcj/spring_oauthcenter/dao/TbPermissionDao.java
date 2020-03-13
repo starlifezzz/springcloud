@@ -1,5 +1,6 @@
 package com.zcj.spring_oauthcenter.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zcj.spring_oauthcenter.po.TbPermission;
 import com.zcj.spring_oauthcenter.po.TbPermissionExample;
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
-public interface TbPermissionDao {
+public interface TbPermissionDao extends BaseMapper<TbPermission> {
     long countByExample(TbPermissionExample example);
 
     int deleteByExample(TbPermissionExample example);

@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.switchuser.SwitchUserFilter;
 
 import java.util.Collections;
 
@@ -25,13 +24,19 @@ public class SecurityOauthConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
 
-    private final MyFilterSecurityInterceptor myFilterSecurityInterceptor;
-
+    //    //    自定义过滤器
+//    private final MyFilterSecurityInterceptor myFilterSecurityInterceptor;
+//
+//    @Autowired
+//    public SecurityOauthConfig(UserDeatilServiceimpl userDeatilServiceimpl, PasswordEncoder passwordEncoder, MyFilterSecurityInterceptor myFilterSecurityInterceptor) {
+//        this.userDeatilServiceimpl = userDeatilServiceimpl;
+//        this.passwordEncoder = passwordEncoder;
+//        this.myFilterSecurityInterceptor = myFilterSecurityInterceptor;
+//    }
     @Autowired
-    public SecurityOauthConfig(UserDeatilServiceimpl userDeatilServiceimpl, PasswordEncoder passwordEncoder, MyFilterSecurityInterceptor myFilterSecurityInterceptor) {
+    public SecurityOauthConfig(UserDeatilServiceimpl userDeatilServiceimpl, PasswordEncoder passwordEncoder) {
         this.userDeatilServiceimpl = userDeatilServiceimpl;
         this.passwordEncoder = passwordEncoder;
-        this.myFilterSecurityInterceptor = myFilterSecurityInterceptor;
     }
 
 
@@ -57,12 +62,13 @@ public class SecurityOauthConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-
+//  wlogin为登录页面，/login是登录接口，/oauth/**喝/noOauth为不登陆可以访问发接口，/tockentest是登录用户后需要SystemUserView权限才能访问的接口
         http.formLogin().loginPage("/wlogin").permitAll().loginProcessingUrl("/login")
-                .and().authorizeRequests().antMatchers("/oauth/**","/noOauth").permitAll()
+                .and().authorizeRequests().antMatchers("/oauth/**", "/noOauth", "/getuser").permitAll()
                 .antMatchers("/tockentest").hasAuthority("SystemUserView")
-                .anyRequest().authenticated()
-                .and().csrf().disable().addFilterAfter(myFilterSecurityInterceptor, SwitchUserFilter.class);
+                .anyRequest().authenticated();
+//        http.authorizeRequests().anyRequest().access("@authService.canAccess(request,authentication)");
+//                .and().csrf().disable().addFilterBefore(myFilterSecurityInterceptor, RememberMeAuthenticationFilter.class);
 
 //        http.csrf().disable();
 //        http.requestMatchers().anyRequest()
@@ -81,6 +87,12 @@ public class SecurityOauthConfig extends WebSecurityConfigurerAdapter {
 //                .withUser("user").password(passwordEncoder.encode("admin")).roles("user");
 //    }
 
+    /**
+     * 设置验证权限为数据库验证
+     *
+     * @param auth
+     * @throws Exception
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDeatilServiceimpl);

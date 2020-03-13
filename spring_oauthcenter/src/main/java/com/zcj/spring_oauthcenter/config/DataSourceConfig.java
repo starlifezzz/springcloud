@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.sql.SQLException;
 
+
 @Configuration
 public class DataSourceConfig {
 
@@ -16,7 +17,7 @@ public class DataSourceConfig {
         druidDataSource.setDriver(new Driver());
         druidDataSource.setUsername("root");
         druidDataSource.setPassword("123456");
-        druidDataSource.setUrl("jdbc:mysql://localhost:3306/oauth");
+        druidDataSource.setUrl("jdbc:mysql://localhost:3306/oauth?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=true");
         return druidDataSource;
     }
 }

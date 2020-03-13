@@ -1,11 +1,12 @@
 package com.zcj.spring_oauthcenter.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zcj.spring_oauthcenter.po.TbUser;
 import com.zcj.spring_oauthcenter.po.TbUserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface TbUserDao {
+public interface TbUserDao extends BaseMapper<TbUser> {
     long countByExample(TbUserExample example);
 
     int deleteByExample(TbUserExample example);

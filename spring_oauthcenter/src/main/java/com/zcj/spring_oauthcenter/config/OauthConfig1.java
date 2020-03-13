@@ -1,6 +1,7 @@
 package com.zcj.spring_oauthcenter.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.zcj.spring_oauthcenter.po.TbUser;
 import com.zcj.spring_oauthcenter.service.impl.UserDeatilServiceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -8,18 +9,25 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 @EnableAuthorizationServer
@@ -77,6 +85,7 @@ public class OauthConfig1 extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+//        允许form提交到oauth/tocken和/oauth/authorize
         security.allowFormAuthenticationForClients();
         security.checkTokenAccess("isAuthenticated()");
         security.tokenKeyAccess("permitAll()");
@@ -118,9 +127,43 @@ public class OauthConfig1 extends AuthorizationServerConfigurerAdapter {
         tokenServices.setSupportRefreshToken(true);
         tokenServices.setClientDetailsService(endpoints.getClientDetailsService());
         tokenServices.setTokenEnhancer(endpoints.getTokenEnhancer());
-        tokenServices.setAccessTokenValiditySeconds(60 * 60 * 60 * 4); // 30天
+        tokenServices.setAccessTokenValiditySeconds(60 * 60 * 60 * 4); //tocken失效时间 30天
         endpoints.tokenServices(tokenServices);
 
 
     }
+
+    /**
+     * Jwt资源令牌转换器
+     *
+     * @return accessTokenConverter
+     */
+    @Bean
+    public JwtAccessTokenConverter accessTokenConverter() {
+        return new JwtAccessTokenConverter() {
+
+            /**
+             * 重写增强token的方法
+             *
+             * @param accessToken
+             *            资源令牌
+             * @param authentication
+             *            认证
+             * @return 增强的OAuth2AccessToken对象
+             */
+            @Override
+            public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
+                Object principal = authentication.getUserAuthentication().getPrincipal();
+                if (principal instanceof TbUser) {
+                    TbUser loginAppUser = (TbUser) principal;
+                    Map<String, Object> infoMap = new HashMap<>();
+                    infoMap.put("username", loginAppUser.getUsername());
+                    ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(infoMap);
+                }
+
+                return super.enhance(accessToken, authentication);
+            }
+        };
+    }
+
 }

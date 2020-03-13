@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.zcj.spring_common.service.Feign;
 import org.springframework.http.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import java.security.Principal;
 
 @RestController
-public class test {
+public class Testf {
 
 
     @Resource
@@ -84,7 +86,9 @@ public class test {
     }
 
     @RequestMapping("/test")
-    public String test() {
+    public String test(Principal principal) {
+        System.out.println(principal);
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
         return "kkkkk";
     }
 

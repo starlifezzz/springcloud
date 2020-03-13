@@ -10,13 +10,12 @@ import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 
 /**
- * 配置验证tocken的方式
+ * 配置验证tocken的方式相当于
+ * 这里的配置相当于properties里面的配置
  */
 @Configuration
 @EnableWebSecurity
 public class ResourceWebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-
 
 
     /**

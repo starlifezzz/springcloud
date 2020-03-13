@@ -9,13 +9,16 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * oauth2资源服务器配置
+ */
 @Configuration
 @EnableResourceServer
 public class ResourceConfig extends ResourceServerConfigurerAdapter {
 
 
     /**
-     * 配置资源服务器
+     * 配置url拦截配置
      *
      * @param http
      * @throws Exception
@@ -55,9 +58,7 @@ public class ResourceConfig extends ResourceServerConfigurerAdapter {
             // 头部的Authorization值以Bearer开头
             String auth = request.getHeader("Authorization");
             if (auth != null) {
-                if (auth.startsWith(OAuth2AccessToken.BEARER_TYPE)) {
-                    return true;
-                }
+                return auth.startsWith(OAuth2AccessToken.BEARER_TYPE);
             }
 
             return false;

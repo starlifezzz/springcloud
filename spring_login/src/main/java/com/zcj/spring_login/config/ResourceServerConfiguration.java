@@ -1,10 +1,14 @@
 package com.zcj.spring_login.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.expression.OAuth2WebSecurityExpressionHandler;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,6 +31,19 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 //    }
 
 
+//    //    @Autowired(required = true)
+//    private final MyFilterSecurityInterceptor myFilterSecurityInterceptor;
+    @Autowired
+    private OAuth2WebSecurityExpressionHandler expressionHandler;
+
+//    @Override
+//    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+////        super.configure(resources);
+//        resources.resourceId("resource");
+//    }
+
+//    @Autowired
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
@@ -38,12 +55,22 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
+//        http.authorizeRequests().anyRequest().access("@authService.canAccess(request,authentication)");
 
+//        http.authorizeRequests().anyRequest().authenticated().and().addFilterBefore(myFilterSecurityInterceptor, RememberMeAuthenticationFilter.class);
+    }
+
+    @Bean
+    public OAuth2WebSecurityExpressionHandler oAuth2WebSecurityExpressionHandler(ApplicationContext applicationContext) {
+        OAuth2WebSecurityExpressionHandler expressionHandler = new OAuth2WebSecurityExpressionHandler();
+        expressionHandler.setApplicationContext(applicationContext);
+        return expressionHandler;
     }
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-//        super.configure(resources);
-        resources.resourceId("resource");
+        resources.expressionHandler(expressionHandler);
     }
+
+
 }
