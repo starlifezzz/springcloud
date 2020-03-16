@@ -15,7 +15,7 @@ public class MybatisMapperScanCOnfig {
         //这里我特地换成了Mapper 这样你就可以尽量遵循官方的规范 使用mapper注解标识你的Mapper类，同时还可以避免其他的非Mapper接口被无差别扫描
 //        mapperScannerConfigurer.setAnnotationClass(org.apache.ibatis.annotations.Mapper.class);
         mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactoryBean");
-        mapperScannerConfigurer.setBasePackage("com.zcj.spring_oauthcenter.dao");
+        mapperScannerConfigurer.setBasePackage("com.zcj.spring_oauthcenter");
         return mapperScannerConfigurer;
     }
 }
