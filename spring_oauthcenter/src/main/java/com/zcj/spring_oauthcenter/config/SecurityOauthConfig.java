@@ -63,10 +63,11 @@ public class SecurityOauthConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
 //  wlogin为登录页面，/login是登录接口，/oauth/**喝/noOauth为不登陆可以访问发接口，/tockentest是登录用户后需要SystemUserView权限才能访问的接口
-        http.formLogin().loginPage("/wlogin").permitAll().loginProcessingUrl("/login")
-                .and().authorizeRequests().antMatchers("/oauth/**", "/noOauth", "/getuser").permitAll()
-                .antMatchers("/tockentest").hasAuthority("SystemUserView")
-                .anyRequest().authenticated();
+        http.csrf().disable().formLogin().loginPage("/wlogin").permitAll().loginProcessingUrl("/login").permitAll()
+                .and().authorizeRequests().antMatchers("/oauth/**", "/noOauth","/login").permitAll().
+                and().authorizeRequests().antMatchers("/tockentest").hasAuthority("SystemUserView").
+                and().authorizeRequests().anyRequest().authenticated();
+
 //        http.authorizeRequests().anyRequest().access("@authService.canAccess(request,authentication)");
 //                .and().csrf().disable().addFilterBefore(myFilterSecurityInterceptor, RememberMeAuthenticationFilter.class);
 
