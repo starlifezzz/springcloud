@@ -5,6 +5,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
+import org.apache.ibatis.plugin.Interceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,6 +38,9 @@ public class MyBatiaPlusConfig {
         }
         sqlSessionFactoryBean.setConfigLocation(mybatisConfigXml);
         sqlSessionFactoryBean.setTypeAliasesPackage("com.zcj.spring_oauthcenter.po");
+        //        关键代码 设置 MyBatis-Plus 分页插件
+        Interceptor[] plugins = {paginationInterceptor()};
+        sqlSessionFactoryBean.setPlugins(plugins);
         return sqlSessionFactoryBean;
     }
 

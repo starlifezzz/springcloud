@@ -1,9 +1,11 @@
 package com.zcj.spring_login.controller;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.ServletContext;
@@ -63,6 +65,18 @@ public class test {
         }
 
         return "data:xdclass 行情" + Math.random() + "\n\n";
+    }
+
+    public void resttemplete() {
+        String url = "http://www.baidu.com";
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        JSONObject postData = new JSONObject();
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+        HttpEntity<JSONObject> entity = new HttpEntity<>(postData, headers);
+        ResponseEntity<String> exchange = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+        String body = exchange.getBody();
+        System.out.println(body);
     }
 
 
